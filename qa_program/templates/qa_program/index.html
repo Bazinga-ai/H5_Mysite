@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Program</title>
+
+    <link rel="stylesheet" href="{% static 'qa_program/css/index.css' %}">
+</head>
+
+
+
+<body>
+    {% if question_list %}
+    <ul>
+    {% for i in question_list %}
+        <a href="/qaprogram/{{ i.no }}/"><li>{{ i.question }}</li></a>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No questions are available.</p>
+    {% endif %}
+</body>
+</html>

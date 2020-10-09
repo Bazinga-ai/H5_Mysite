@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'sirenscall/images/icon-bear.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siren's Call</title>
+
+    
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sirenscall/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sirenscall/css/normalize.css' %}">
+
+    {% comment %}
+    <script>
+        var css = '<link rel="stylesheet" type="text/css" href="{% static \'sirenscall/css/base.css?v=' + Math.random() + "\' %}\">"
+
+
+        var css = '<link rel="stylesheet" href="../homepage/css/base.css?v=' + Math.random() + '">';
+        document.write(css);
+    </script>
+    {% endcomment %}
+
+    <script src="{% static 'sirenscall/js/jquery/2.0.0/jquery.min.js' %}"></script>
+
+</head>
+
+<body>
+
+    <div class="search-frame">
+        <div class="title" id="title">Siren's Call</div>
+        <div class="search-label">
+            <input type="text" id="search-info" onblur="lostFocus()" onfocus="getFocus()"
+                onkeydown="checkKeyCode(event)" autocomplete="off" placeholder="Search">
+        </div>
+        <div><button class="go-btn" id="go-btn">→</button></div>
+        <div class="search-table" id="s-table">
+            <ul id="search-ul">
+            </ul>
+        </div>
+
+        <div class="time-frame">
+            <div class="time-label" id="time-label"></div>
+            <div class="date-label" id="date-label"></div>
+        </div>
+    </div>
+
+    <div class="tools-frame">
+        <span class="tools-box">
+            <div class="tools-mini-box">
+                <button class="under-cons-icon" id="disabled-btn"></button>
+                <span>Under Construct</span>
+            </div>
+        </span>
+
+        <span class="tools-box">
+            <div class="tools-mini-box">
+                <button class="airdrop-icon" id="airdrop"></button>
+                <span>File Radar</span>
+            </div>
+        </span>
+
+        <span class="tools-box">
+            <div class="tools-mini-box">
+                <button class="recorder-icon" id="recorder"></button>
+                <span>Text Recorder</span>
+            </div>
+        </span>
+
+        <span class="tools-box">
+            <div class="tools-mini-box">
+                <button class="under-cons-icon" id="disabled-btn"></button>
+                <span>Under Construct</span>
+            </div>
+        </span>
+    </div>
+
+
+
+    <div class="copyright">
+        <div>Jason Dnfkr</div>
+        <div><a href="http://www.beian.miit.gov.cn/">赣ICP备 20002402</a></div>
+    </div>
+    <div class="bg" id="bg-spec"></div>
+    <div class="bg" id="bg"></div>
+
+    </div>
+    
+</body>
+
+{% load static %}
+
+<script src="{% static 'sirenscall/js/script.js' %}"></script>
+
+</html>

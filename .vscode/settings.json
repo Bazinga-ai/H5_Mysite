@@ -1,0 +1,6 @@
+{
+    "python.autoComplete.extraPaths": [
+        "F:/python3/Lib/site-packages",
+        "F:/python3/Scripts",
+    ],
+}

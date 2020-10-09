@@ -1,0 +1,118 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siren's Call - File Radar</title>
+    <link rel="shortcut icon" href="{% static 'sirenscall/images/texScannerIconWhite.png' %}">
+
+    <script src="/static/js/jquery/2.0.0/jquery.min.js"></script>
+    <link href="/static/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/normalize.css">
+
+    <link rel="stylesheet" href="/static/bootstrap-fileinput-master/css/fileinput.min.css">
+    <script src="/static/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'sirenscall/css/radar.css' %}">
+
+</head>
+
+<body>
+    <div class="main" id="main">
+        <div class="logo"></div>
+        <div class="title">File Radar</div>
+        <button id="upload">Upload</button><br>
+        <button id="download">Download</button><br>
+        <button id="back">Back</div>
+    </div>
+
+    <div class="show-box" id="show-box-upload">
+        <div class="upload">
+            <h1>Upload</h1><br><br>
+            <span>Key Code</span>
+            <form action="" method="post" enctype="multipart/form-data" name="uploadForm">
+                {% csrf_token %}
+                <input type="text" class="form-control" id="id_keycode_upload" placeholder="Input key code..." name="n_keycode_upload" maxlength="20" required><br><br>
+
+                
+                <div class="new-button-box">
+                    <input type="file" name="n_file_upload" id="file-input" onchange="file_check(this)"><br>
+                    <div id="choose-file-btn" class="choose-file-btn">CHOOSE FILE</div>
+                    <div id="file-name">
+                    
+                    </div>
+                </div>
+                <div id="f-size">
+
+                </div>
+                <div id="warning">
+
+                </div>
+
+                <input type="submit" value="UPLOAD" class="button-nor" id="submit_upload">
+            </form>
+        </div>
+        <div class="close" id="close-upload">X</div>
+    </div>
+
+    
+    <div class="show-box" id="show-box-download">
+        <div class="upload">
+            <h1>Download</h1><br><br>
+            
+            <form action="" method="post" enctype="multipart/form-data" name="downloadForm">
+                {% csrf_token %}
+                <span>ID</span>
+                <input type="text" class="form-control" id="id_id" placeholder="Input key code..." name="n_id" required>
+
+                <span>Key Code</span>
+                <input type="text" class="form-control" id="id_key_download" placeholder="Input key code..." name="n_keycode_download"><br><br>
+
+                <input type="submit" value="DOWNLOAD" class="button-nor" id="submit_download">
+                <div id="warning-download">
+                    {% comment %} warning here. {% endcomment %}
+                </div>
+
+                
+            </form>
+        </div>
+        <div class="close" id="close-download">X</div>
+    </div>
+
+    <div class="show-box-after" id="show-box-after">
+        <div class="close" id="close-after">X</div>
+        <div class="text" id="show-box-after-text">
+        
+        </div>
+    </div>
+
+
+    <div class="bg"></div>
+</body>
+
+{% load static %}
+
+<script>
+    str_csrf_token = '{{ csrf_token }}';
+
+    url1 = "{% url 'sirenscall:radar_upload' %}";
+    url2 = "{% url 'sirenscall:radar_download_check' %}";
+    url3 = "{% url 'sirenscall:radar_blank' %}";
+    
+</script>
+ 
+<script src="{% static 'sirenscall/js/radar.js' %}"></script>
+
+
+</html>
+
+
+

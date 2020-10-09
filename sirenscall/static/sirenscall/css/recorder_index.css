@@ -1,0 +1,182 @@
+/* body {
+    background-color: bisque;
+} */
+
+@font-face {
+    font-family: 'Bombardier';
+    src: url('../font/Bombardier.ttf');
+}
+
+body {
+    min-width: 800px;
+}
+
+.class-font {
+    font-family: 'Bombardier';
+}
+
+.bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../images/bg/wallpaper.jpg") center 0 no-repeat;
+    background-size: cover auto;
+    /* background-position-y: 80%; */
+    -webkit-background-size: cover;
+    /* background-attachment: fixed; */
+    z-index: -999;
+    transition: all 0.3s ease;
+}
+
+.w {
+    border-radius: 15px;
+    width: 700px; 
+    position: relative; 
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(235, 235, 235, 0.75);
+    /* opacity: 0.75; */
+    margin-bottom: 100px;
+    /* border: #fff 1px solid; */
+}
+
+.w h1 {
+    /* color: white; */
+    user-select: none;
+    font-family: Bombardier;
+    text-align: center;
+}
+
+.back-btn {
+    cursor: pointer;
+    position: absolute;
+    /* background-color: aquamarine; */
+    width: 20px;
+    height: 20px;
+    user-select: none;
+    right: 3%;
+    top: 2%;
+    font-size: 20px;
+}
+
+.enter-box {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 15px;
+    padding-top: 1px;
+    padding-left: 10px;
+    padding-right: 40px;
+    height: 520px;
+    /* background-color: aquamarine; */
+}
+
+.enter-box span {
+    font-family: Bombardier;
+    font-size: 18px;
+}
+
+.short-input {
+    width: 200px;
+}
+
+.author {
+    user-select: none;
+    width: 100%;
+    padding-left: 50%;
+    position: relative;
+    float: right;
+}
+
+.color-ctrl {
+    user-select: none;
+}
+
+.submit-button {
+    position: relative;
+    float: right;
+}
+
+.submit-button .btn {
+    width: 100px;
+    font-family: Bombardier;
+    font-size: 18px;
+} 
+
+input {
+    opacity: .9;
+}
+
+textarea {
+    opacity: .8;
+}
+
+pre {
+    left: 0;
+    opacity: .9;
+}
+
+.list-box {
+    margin-top: 90px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.list-bottom {
+    margin-bottom: 20px;
+}
+
+.pg-navi {
+    /* transform: translate(25%, 0%); */
+    text-align: center;
+    opacity: .8;
+}
+
+.main_text {
+    color: rgb(0, 0, 0, 1);
+}
+
+
+#warning {
+    user-select: none;
+    text-align: right;
+    left: 48%;
+    position: absolute;
+    color: rgb(83, 164, 84);
+    /* background-color: brown; */
+}
+
+.locked-box {
+    float: left;
+    width: 100%;
+    font-size: 18px;
+    height: 60px;
+    /* background-color: aquamarine; */
+    padding-top: 10px;
+    padding-left: 10px;
+    font-family: 'Bombardier';
+}
+
+.input-ck-box-font {
+    font-family: 'Bombardier';
+    font-weight: lighter;
+}
+
+.locked-box .form-control {
+    display: inline;
+}
+
+.locked-box input {
+    /* position: relative; */
+}
+
+.locked-box .btn {
+    font-size: 18px;
+    height: 30px;
+    line-height: 10px;
+}

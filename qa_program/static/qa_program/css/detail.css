@@ -1,0 +1,63 @@
+body {
+    color: white;
+    background-color: rgb(48, 48, 48);
+}
+
+.title {
+    font-size: 24px;
+}
+
+.bg {
+    background-color: rgb(48, 48, 48);
+}
+
+.btn {
+    border: 1px solid white;
+    text-align: left;
+    width: 100%;
+    font-size: 24px;
+    height: auto;
+    white-space: normal;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.btn:active {
+    color: white;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.down {
+    bottom: 0;
+    position: fixed;
+    font-size: 24px;
+    margin-top: 900px;
+}
+
+.mid {
+    margin-top: 20px;
+    float: left;
+    width: 50%;
+    height: 70px;
+    color: white;
+    background-color: rgb(72, 72, 72);
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.box {
+    margin-bottom: 300px;
+}
+
+input {
+    margin-top: 20px;
+    width: 50%;
+    color: white;
+    background-color: rgb(72, 72, 72);
+    height: 70px;
+    text-align: center;
+    border-radius: 10px;
+}

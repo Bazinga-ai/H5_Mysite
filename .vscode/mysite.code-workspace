@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "F:\\python3\\python.exe",
+		"python.autoComplete.extraPaths": [
+			"F:\\python3\\Lib\\site-packages",
+			"F:\\python3\\Scripts",
+		],
+
+		"files.associations": {
+			"**/*.html": "html",
+			"**/templates/**/*.html": "django-html",
+			"**/templates/**/*": "django-txt",
+			"**/requirements{/**,*}.{txt,in}": "pip-requirements"
+		},
+		"emmet.includeLanguages": { 
+			"django-html": "html",
+		},
+		"python.autoComplete.addBrackets": true,
+	}
+}

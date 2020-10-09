@@ -1,0 +1,7 @@
+1. \b 单词匹配. 开头必须空出来 
+	比如: XXXabc或XXXabcXXX都不可以, abcXXX或abc可以. 与后文无关
+
+2. 
+
+
+

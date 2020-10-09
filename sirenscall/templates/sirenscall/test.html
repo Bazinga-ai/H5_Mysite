@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST PAGE. SHOULD NOT SEE THIS.</title>
+
+    <script src="/static/js/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <!-- <div>
+        {% if prepare_list %}
+            {% for recorder in prepare_list %}
+            <div>
+                {{ recorder.main_text }}
+                <br><br>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>NO INFO.</p>
+        {% endif %}
+    </div> -->
+
+    {% for contact in contacts %}
+    {# Each "contact" is a Contact model object. #}
+    {{ contact.full_name|upper }}<br>
+    {{ contact.main_text }}
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if contacts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}">next</a>
+                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <hr>
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="n_input1" id="id_input1">
+            <input type="submit" value="OK" id="id_submit">
+        </form>
+    </div>
+    <hr>
+</body>
+
+{% load static %}
+
+<script>
+    str_csrf_token = '{{ csrf_token }}';
+
+
+    $("#id_submit").click(function(e) {
+        test_str = $("#id_input1").val();
+
+        $.ajax({
+            url: "{% url 'sirenscall:test_form' %}",
+            type: "POST",
+            data: {
+                'd_test_str': test_str,
+
+                csrfmiddlewaretoken: str_csrf_token
+            },
+            success: function(data) {
+                console.log("OK");
+            }
+        });
+        e.preventDefault();
+    });
+</script>
+
+</html>

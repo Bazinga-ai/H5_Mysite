@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'sirenscall/images/texTomeIcon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siren's Call - Recorder</title>
+
+    {% load static %}
+    <script src="/static/js/jquery/2.0.0/jquery.min.js"></script>
+    <link href="/static/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/normalize.css">
+
+    <link rel="stylesheet" href="{% static 'sirenscall/css/recorder_index.css' %}">
+
+</head>
+
+<body>
+    <div class="w">
+        
+        <!-- SUBMIT FORM  -->
+        <div class="enter-box">
+            <div class="back-btn" id="back-btn">
+                X
+            </div>
+            <h1>RECORD YOUR TEXT HERE</h1>
+            
+            {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <span id="warning"></span>
+
+            <form action="{% url 'sirenscall:recorder_submit' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group short-input color-ctrl">
+                    <span>Title: </span>
+                    <input type="text" class="form-control" name="n_title" id="id_title" placeholder="OPTIONAL">
+                </div>
+                <div class="form-group color-ctrl">
+                    <span>Text: </span>
+                    <textarea class="form-control main_text" name="n_main_text" id="id_main_text" cols="30" rows="10"></textarea>
+                </div>
+                <div class="check-box">
+                    <label>
+                    <input type="checkbox" id="input-ck-box"> <span class="input-ck-box-font">Need password</span>
+                    </label>
+                </div>
+                <div id="password-input" class="form-group short-input">
+                    <span>Password: </span>
+                    <input type="text" class="form-control class-font" name="n_password" id="id_password">
+                </div>
+                <div class="form-group short-input author">
+                    <span>Author: </span>
+                    <input type="text" class="form-control" name="n_author" id="id_author" placeholder="OPTIONAL">
+                </div>
+                <div class="submit-button">
+                    <input type="submit" class="btn btn-success" value="SUBMIT">
+                </div>
+            </form>
+        </div>
+
+        <!-- SUBMIT FORM END  -->    
+
+        <!-- RECORDER LIST  -->
+
+        {% if contacts %}
+            <div class="list-box">
+            {% for contact in contacts %}
+            {{ contact.full_name|upper }}<br>
+                <div class="list-tit">
+                    <span>[{{ contact.id }}]</span>
+                    <span>{{ contact.title }}</span>
+                </div>
+                <!-- <div class="main-text">
+                    {{ recorder.main_text }}
+                </div> -->
+                <div class="list-main">
+                    {% if contact.password == '0' %}
+                    {% comment %} {{ contacts.password }} {% endcomment %}
+                    <pre class="pre-scrollable">{{ contact.main_text }}</pre>
+                    {% else %}
+                    <div id="locked-pre">
+                        <!-- ready to unlock something... -->
+                    </div>
+                    
+                    <form action="" method="POST" id="unlock-form">
+                        {% csrf_token %}
+                        <div class="locked-box">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                            
+                            <span><input type="text" class="form-control short-input" name="n_unlock" id="id_unlock" placeholder="This record is locked."></span>
+                            <input type="submit" class="btn btn-default locked-btn" id="locked-btn" value="UNLOCK">
+                            <span id="locked-warning"></span>
+                        </div>
+                    </form>
+
+
+                    <script>
+                        var id = {{ contact.id }};
+                        $("#id_unlock").attr("id", "id_unlock-" + id);    //input 
+                        $("#locked-btn").attr("id", "lockid-" + id);   //button
+                        $("#locked-pre").attr("id", "locked-pre-" + id); //上锁的pre。在解锁之后显示内容
+                        $("#unlock-form").attr("id", "unlock-form-" + id); //改变表单ID
+                        $("#locked-warning").attr("id", "locked-warning-" + id); //显示错误信息的id
+                    </script>
+
+
+                    {% endif %}
+                </div>
+                <div class="list-bottom">
+                    {{ contact.pub_date }} - {{ contact.author }}
+                </div>
+                
+            {% endfor %}  
+            </div>
+
+            <div class="pg-navi">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if contacts.has_previous %}
+                        <li>
+                            <a href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                            <li class="disabled"><a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                        {% endif %}
+
+                        {% if contacts.number|add:-2 > 0 %}
+                        <li><a href="?page={{ contacts.number|add:-2 }}">{{ contacts.number|add:-2 }}</a></li>
+                        {% endif %}
+
+                        {% if contacts.number|add:-1 > 0 %}
+                        <li><a href="?page={{ contacts.number|add:-1 }}">{{ contacts.number|add:-1 }}</a></li>
+                        {% endif %}
+
+                        {% if contacts.number > 0 %}
+                        <li class="active"><a href="?page={{ contacts.number }}">{{ contacts.number }}</a></li>
+                        {% endif %}
+
+                        {% if contacts.number|add:1 <= contacts.paginator.num_pages %}
+                        <li><a href="?page={{ contacts.number|add:+1 }}">{{ contacts.number|add:1 }}</a></li>
+                        {% endif %}
+                        
+                        {% if contacts.number|add:2 <= contacts.paginator.num_pages %}
+                        <li><a href="?page={{ contacts.number|add:+2 }}">{{ contacts.number|add:2 }}</a></li>
+                        {% endif %}
+
+                        {% if contacts.has_next %}
+                        <li>
+                            <a href="?page={{ contacts.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% else %}
+                            <li class="disabled"><a href="" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+        {% else %}
+            <p>No Recorders are available.</p>
+        {% endif %}
+
+        
+        <!-- RECORDER LIST END  -->
+    </div>
+    <div class="bg">
+        
+    </div>
+</body>
+
+{% load static %}
+
+<script>
+    str_csrf_token = '{{ csrf_token }}';
+
+    url1 = "{% url 'sirenscall:recorder_submit' %}";
+    url2 = "{% url 'sirenscall:recorder_pwd_check' %}";
+
+</script>
+
+<script src="{% static 'sirenscall/js/recorder_index.js' %}"></script>
+
+
+</html>

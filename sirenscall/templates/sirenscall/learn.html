@@ -1,0 +1,98 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>测试下拉</title>
+    <style type="text/css">
+        .SoSuoDa {
+            display: inline-block;
+            position: relative;
+            _zoom: 1;
+            _display: inline;
+        }
+
+        .SoSuo {
+            z-index: 99;
+            visibility: hidden;
+            border: 1px solid #888;
+            background: rgb(158, 100, 100);
+            position: absolute;
+            text-align: left;
+            width: 99.6%;
+            margin-top: 24px;
+        }
+
+        .SoSuo a {
+            display: block;
+            text-decoration: none;
+            padding-left: 5px;
+            border-bottom: #CCC 1px dashed;
+            height: 24px;
+            line-height: 24px;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        .SoSuo a.on {
+            background: #666;
+            color: #fff;
+            transition: all 0.7s;
+        }
+    </style>
+</head>
+<script type="text/javascript">
+    function AjaxSo(Select_One_ID) {
+        document.getElementById(Select_One_ID).style.visibility = 'visible';
+    }
+    var cur = -1;
+    function checkKeyCode(e) {
+        var as = document.getElementById('soso').getElementsByTagName('a');
+        switch (e.keyCode) {
+            case 38://上
+                if (cur == -1) cur = as.length - 1;
+                else {
+                    as[cur].className = ''; cur -= 1;
+                }
+                if (cur < 0) cur = as.length - 1;
+                as[cur].classList = 'on'
+                break;
+            case 40://下
+                if (cur == -1) cur = 0;
+                else {
+                    as[cur].className = '';
+                    cur++;
+                }
+                if (cur >= as.length) cur = 0;
+                as[cur].classList = 'on'
+                break;
+            case 13://回车选择
+                if (cur != -1) document.getElementById('username').value = as[cur].innerHTML;
+                break;
+        }
+    }
+</script>
+
+<body>
+    <div align="center" style="margin:2px;">
+
+
+        <span class="SoSuoDa" id="HI" style="">
+            <br>
+            <br>
+            <br>
+            <div id="soso" class="SoSuo" onmouseover="document.getElementById('soso').style.visibility='visible';"
+                onmouseout="document.getElementById('soso').style.visibility='hidden';">
+                <a href="javascript:void(0)">怎么上下键选择12</a>
+                <a href="javascript:void(0)">怎么上下键选择34</a>
+                <a href="javascript:void(0)">怎么上下键选择56</a>
+            </div>
+            <input name="username" id="username" style="width:99%" maxlength="4" onclick="AjaxSo('soso');"
+                autocomplete="off" onkeydown="checkKeyCode(event)">
+        </span>
+
+    </div>
+</body>
+
+</html>
